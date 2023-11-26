@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class VRAttenuation : MonoBehaviour
 {
@@ -13,11 +14,16 @@ public class VRAttenuation : MonoBehaviour
     public GameObject womanText;
     public GameObject manText;
     
+    public Slider womanSlider;
+    public Slider manSlider;
+    
     // Start is called before the first frame update
     void Start()
     {
         womanAudio.volume = 1.0f;
         manAudio.volume = 1.0f;
+        womanSlider.value = womanAudio.volume;
+        manSlider.value = manAudio.volume;
         womanText.SetActive(false);
         manText.SetActive(false);
     }
@@ -29,8 +35,10 @@ public class VRAttenuation : MonoBehaviour
         if (inputSignal > 0)
         {
             manAudio.volume = 1.0f;
+            manSlider.value = manAudio.volume;
             manText.SetActive(false);
             womanAudio.volume = 1 - inputSignal;
+            womanSlider.value = womanAudio.volume;
             if (inputSignal >= 0.5f)
             {
                 womanText.SetActive(true);
@@ -43,8 +51,10 @@ public class VRAttenuation : MonoBehaviour
         else if (inputSignal < 0)
         {
             womanAudio.volume = 1.0f;
+            womanSlider.value = womanAudio.volume;
             womanText.SetActive(false);
             manAudio.volume = 1 + inputSignal;
+            manSlider.value = manAudio.volume;
             if (inputSignal <= -0.5f)
             {
                 manText.SetActive(true);
@@ -59,7 +69,9 @@ public class VRAttenuation : MonoBehaviour
             manText.SetActive(false);
             womanText.SetActive(false);
             womanAudio.volume = 1 - inputSignal;
+            womanSlider.value = womanAudio.volume;
             manAudio.volume = 1 + inputSignal;
+            manSlider.value = manAudio.volume;
         }
     }
 
