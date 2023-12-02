@@ -13,6 +13,8 @@ public class VRAttenuation : MonoBehaviour
 
     public GameObject womanText;
     public GameObject manText;
+    public GameObject hmdWomanText;
+    public GameObject hmdManText;
     
     public Slider womanSlider;
     public Slider manSlider;
@@ -26,6 +28,9 @@ public class VRAttenuation : MonoBehaviour
         manSlider.value = manAudio.volume;
         womanText.SetActive(false);
         manText.SetActive(false);
+        
+        hmdWomanText.SetActive(false);
+        hmdManText.SetActive(false);
     }
 
     // Update is called once per frame
@@ -37,7 +42,7 @@ public class VRAttenuation : MonoBehaviour
             manAudio.volume = 1.0f;
             manSlider.value = manAudio.volume;
             manText.SetActive(false);
-            womanAudio.volume = 1 - inputSignal;
+            womanAudio.volume = 1 - inputSignal;  
             womanSlider.value = womanAudio.volume;
             if (inputSignal >= 0.5f)
             {
@@ -47,6 +52,9 @@ public class VRAttenuation : MonoBehaviour
             {
                 womanText.SetActive(false);
             }
+            
+            hmdManText.SetActive(true);
+            hmdWomanText.SetActive(false);
         }
         else if (inputSignal < 0)
         {
@@ -63,6 +71,9 @@ public class VRAttenuation : MonoBehaviour
             {
                 manText.SetActive(false);
             }
+            
+            hmdManText.SetActive(false);
+            hmdWomanText.SetActive(true);
         }
         else
         {
@@ -72,6 +83,9 @@ public class VRAttenuation : MonoBehaviour
             womanSlider.value = womanAudio.volume;
             manAudio.volume = 1 + inputSignal;
             manSlider.value = manAudio.volume;
+            
+            hmdWomanText.SetActive(false);
+            hmdManText.SetActive(false);
         }
     }
 
